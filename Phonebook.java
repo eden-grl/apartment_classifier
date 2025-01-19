@@ -19,6 +19,9 @@ public class Phonebook
     public int getSize()
     {
         // Complete this method
+        if (size != 0) {
+            return size;
+        }
         return 0;
     }
 
