@@ -90,6 +90,20 @@ public class Phonebook
     private void increasePhonebookMaxSize()
     {
         // Complete this method
+        // Check if the current size has reached the maximum
+        if (getSize() == contacts.length) {
+
+            // Double the capacity
+            int newCapacity = 50;
+            Person [] newContact = new Person[newCapacity];
+
+            // Copy the elements from the old array to the new array
+            System.arraycopy(newContact, newCapacity, newContact, newCapacity, newCapacity);
+
+            // Update the reference to the new array
+            contacts = newContact;
+        }
+        // if the size  is not yet at maximum do nothing.
     }
 
     /**
