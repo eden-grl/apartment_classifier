@@ -50,6 +50,11 @@ public class Phonebook
     public Person getContact(String id)
     {
         // Complete this method
+        for (Person contact : contacts) {
+            if (contact != null && contact.getId() == id) {
+                return contact;
+            }
+        }
         return null;
     }
 
