@@ -34,6 +34,10 @@ public class Phonebook
     public Person getContactAtIndex(int index)
     {
         // Complete this method
+        if (index >= 0 && index < contacts.length) {
+            Person contactIndex = contacts[index];
+            return contactIndex;
+        }
         return null;
     }
 
