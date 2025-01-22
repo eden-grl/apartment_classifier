@@ -114,6 +114,22 @@ public class Phonebook
     public void insert(Person p)
     {
         // Complete this method
+        // Check if the phonebook is already full
+        if (size == contacts.length) {
+            increasePhonebookMaxSize();
+        }
+
+        //Find the index to insert the new person
+        int index = findIndexInsertion(p);
+
+        //Shift elements to the right to make space for the new person
+        for (int i = size; i > index; i--) {
+            contacts[i] = contacts[i - 1];
+        }
+        
+        //Insert the new person
+        contacts[index] = p;
+        incrSize();
     }
 
     /**
@@ -125,7 +141,14 @@ public class Phonebook
     private int findIndexInsertion(Person p)
     {
         // Complete this method
-        return 0;
+        for (int i = 0; i < size; i++) {
+            if (contacts[i].compareTo(p) > 0) {
+                return i;
+                //This will return the index where the new person should be inserted
+            }
+        }
+        return size;
+        //If all existing contacts are less, insert at the end
     }
 
     /**
