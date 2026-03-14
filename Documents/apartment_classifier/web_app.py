@@ -1,14 +1,21 @@
 import streamlit as st
-import joblib
 import pandas as pd
-
-# Load trained model
-model = joblib.load("rent_classifier_model.pkl")
+import joblib
 
 st.set_page_config(page_title="Apartment Rent Classifier", page_icon="🏠")
 
 # -----------------------------
-# Prescriptive Function
+# Load Model
+# -----------------------------
+@st.cache_resource
+def load_model():
+    model = joblib.load("rent_classifier_model.pkl")
+    return model
+
+model = load_model()
+
+# -----------------------------
+# Prescriptive Recommendation
 # -----------------------------
 def recommend_action(prediction):
 
@@ -26,7 +33,6 @@ def recommend_action(prediction):
             "Explanation": "Lower rental cost presents lower financial risk."
         }
 
-
 # -----------------------------
 # SESSION STATE
 # -----------------------------
@@ -41,8 +47,8 @@ if st.session_state.page == "home":
     st.title("🏠 Apartment Rent Classification System")
 
     st.write("""
-    This system predicts whether an apartment has **Low Rent or High Rent**
-    based on its listing features.
+    This system predicts whether an apartment listing has **Low Rent or High Rent**
+    based on its features.
     """)
 
     if st.button("Start Classification"):
@@ -86,12 +92,8 @@ elif st.session_state.page == "predict":
         })
 
         prediction = model.predict(input_data)[0]
-
         action = recommend_action(prediction)
 
-        # -----------------------------
-        # DISPLAY RESULT
-        # -----------------------------
         st.subheader("Prediction Result")
 
         if prediction == 1:
@@ -99,9 +101,6 @@ elif st.session_state.page == "predict":
         else:
             st.info("🏡 Low Rent Apartment")
 
-        # -----------------------------
-        # PRESCRIPTIVE OUTPUT
-        # -----------------------------
         st.subheader("Risk Level")
         st.write(action["Risk Level"])
 
