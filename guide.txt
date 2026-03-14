@@ -1,0 +1,4 @@
+venv - environment
+app - working classification without prescriptive
+app2 - working classification with prescriptive
+rent_classified_model.pkl - downloaded model from colab
